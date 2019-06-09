@@ -1,9 +1,12 @@
 {
     "compilerOptions": {
         "outDir": "./dist/scripts",
-        "allowJs": true,
-        "target": "es5",
-        "downlevelIteration": true
+        "allowJs": false,
+        "downlevelIteration": true,
+        "lib": [
+            "es2017",
+            "dom"
+        ]
     },
     "include": [
         "./src/**/*"

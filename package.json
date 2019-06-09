@@ -1,0 +1,24 @@
+{
+  "name": "tsg3",
+  "version": "1.0.0",
+  "description": "TypeScript-base life simulator",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "tsc -w",
+    "s": "http-server -c-1 -i"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lokidokicoki/tsg3.git"
+  },
+  "author": "lokidokicoki@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lokidokicoki/tsg3/issues"
+  },
+  "homepage": "https://github.com/lokidokicoki/tsg3#readme",
+  "devDependencies": {
+    "http-server": "^0.11.1"
+  }
+}

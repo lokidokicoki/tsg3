@@ -1,7 +1,7 @@
 "use strict";
 
 function run():void{
-  document.getElementById(`arena`).innerHTML = `hello`;
+  document.getElementById(`arena`).innerHTML = `Hello, World! Things live her`;
 
 }
 

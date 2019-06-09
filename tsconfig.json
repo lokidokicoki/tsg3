@@ -3,6 +3,7 @@
         "outDir": "./dist/scripts",
         "allowJs": false,
         "downlevelIteration": true,
+        "module": "es6",
         "lib": [
             "es2017",
             "dom"

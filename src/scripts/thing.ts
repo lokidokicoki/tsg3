@@ -13,17 +13,17 @@ export default class Thing {
    * Creates an instance of Thing.
    * @memberof Thing
    */
-  constructor() {
+  constructor(x: number, y: number, d: number) {
     this.health = 100;
-    this.position = { x: 100, y: 100 };
+    this.position = { x, y };
     this.id = 1;
-    this.direction = 0;
+    this.direction = d;
     this.speed = 10;
     this.createGfx();
   }
 
   /**
-   *
+   * Update gfx
    *
    * @memberof Thing
    */

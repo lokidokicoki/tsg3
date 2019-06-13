@@ -12,7 +12,7 @@ function run(): void {
   document.getElementById(`rotate`).addEventListener(`click`, rotate);
 
   for (let i = 0; i < 5; i++) {
-    things.add(new Thing());
+    things.add(new Thing(getRandomInt(500), getRandomInt(500), getRandomInt(360)));
   }
 }
 

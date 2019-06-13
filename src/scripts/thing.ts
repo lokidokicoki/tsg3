@@ -29,7 +29,7 @@ export default class Thing {
    */
   public update() {
     console.log(this.position, this.direction);
-    this.gfx.prop(`transform`, `translate(${this.position.x}, ${this.position.y}) rotate(${this.direction}, -15, -15)`);
+    this.gfx.prop(`transform`, `translate(${this.position.x}, ${this.position.y}) rotate(${this.direction}, 15,15)`);
   }
 
   /**
@@ -39,7 +39,7 @@ export default class Thing {
    * @memberof Thing
    */
   private createGfx() {
-    this.gfx = new Renderable(`g`, { transform: `translate(${this.position.x}, ${this.position.y})` });
+    this.gfx = new Renderable(`g`, { transform: `translate(${this.position.x}, ${this.position.y}) rotate(${this.direction}, 15, 15)` });
     const body = new Renderable(`rect`, { width: 30, height: 30, fill: `#00ff00`, x: 0, y: 0 });
     const eye = new Renderable(`rect`, { width: 10, height: 10, fill: `#000000`, x: 10, y: 0 });
     this.gfx.append(body);

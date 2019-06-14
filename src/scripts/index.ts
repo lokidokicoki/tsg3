@@ -68,10 +68,12 @@ function move(opts?: any) {
 
 
       if (opts.center) {
-        thing.position = { x: opts.x, y: opts.y }
+        thing.x = opts.x;
+        thing.y = opts.y;
         thing.update();
       } else if (opts.x || opts.y) {
-        thing.position = { x: thing.position.x + opts.x || thing.position.x, y: thing.position.y + opts.y || thing.position.y };
+        thing.x = thing.x + opts.x || thing.x;
+        thing.y = thing.y + opts.y || thing.y;
         thing.update();
       }
     } else {
@@ -82,7 +84,7 @@ function move(opts?: any) {
 function rotate() {
   things.forEach((thing: Thing) => {
     thing.direction += 5;
-    thing.update();
+    thing.update(true);
   });
 }
 function rotzero() {

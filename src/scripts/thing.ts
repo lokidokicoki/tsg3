@@ -4,11 +4,13 @@ import * as utils from './utils'
 
 export default class Thing {
   public health: number;
-  public position: { x: number, y: number };
+  public x: number;
+  public y: number;
   public id: number;
   public speed: number;
   public gfx: Renderable;
   private angle: number;
+  private spinCount: number;
   private dx: number;
   private dy: number;
   private dirty: boolean;
@@ -21,9 +23,11 @@ export default class Thing {
    */
   constructor(x: number, y: number, d: number) {
     this.health = 100;
-    this.position = { x, y };
+    this.x = x;
+    this.y = y;
     this.id = 1;
     this.angle = d;
+    this.spinCount = 0;
     this.dirty = true;
     this.speed = 1;
     this.halfPi = (Math.PI / 180);
@@ -61,24 +65,48 @@ export default class Thing {
       this.dirty = false;
     }
 
-    let x = this.position.x;
-    let y = this.position.y
+    let x = this.x
+    let y = this.y
     if (ignoreMove === undefined) {
       x += this.dx;
       y += this.dy;
     }
 
-    const rb = Renderer.getInstance().bbox
-    if (this.bbox.left <= rb.left || this.bbox.right >= rb.right || this.bbox.top <= rb.top || this.bbox.bottom >= rb.bottom) {
-      this.direction = utils.getRandomInt(360)
+    const rb = Renderer.getInstance().bbox;
+    if (this.bbox.left < rb.left || this.bbox.right > rb.right || this.bbox.top < rb.top || this.bbox.bottom > rb.bottom) {
+      this.tumble(rb);
+
     } else {
-      this.position.x = x;
-      this.position.y = y;
+      this.spinCount = 0;
+      this.x = x;
+      this.y = y;
     }
 
-    console.log(this.dx, this.dy, this.position, this.angle);
-    this.gfx.prop(`transform`, `translate(${this.position.x}, ${this.position.y}) rotate(${this.angle}, 15,15)`);
+    console.log(this.dx, this.dy, this.x, this.y, this.angle);
+    this.gfx.prop(`transform`, `translate(${this.x}, ${this.y}) rotate(${this.angle}, 15,15)`);
     this.bbox = this.gfx.svg.getBoundingClientRect();
+  }
+
+  private tumble(rb: (ClientRect | DOMRect)) {
+
+    if (this.spinCount < 5) {
+      this.direction = utils.getRandomInt(360);
+      this.spinCount++;
+    } else {
+      this.spinCount = 0;
+      if (this.bbox.left <= rb.left) {
+        this.x += 10
+      }
+      if (this.bbox.right >= rb.right) {
+        this.x -= 10
+      }
+      if (this.bbox.top <= rb.top) {
+        this.y += 10
+      }
+      if (this.bbox.bottom >= rb.bottom) {
+        this.y -= 10
+      }
+    }
   }
 
   /**
@@ -88,7 +116,7 @@ export default class Thing {
    * @memberof Thing
    */
   private createGfx() {
-    this.gfx = new Renderable(`g`, { transform: `translate(${this.position.x}, ${this.position.y}) rotate(${this.angle}, 15, 15)` });
+    this.gfx = new Renderable(`g`, { transform: `translate(${this.x}, ${this.y}) rotate(${this.angle}, 15, 15)` });
     const body = new Renderable(`rect`, { width: 30, height: 30, fill: `#00ff00`, x: 0, y: 0 });
     const eye = new Renderable(`rect`, { width: 10, height: 10, fill: `#000000`, x: 20, y: 10 });
     // const guide = new Renderable(`line`, { x1: 0, y1: 15, stroke: `black`, x2: 60, y2: 15 });

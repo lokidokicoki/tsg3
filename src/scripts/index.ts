@@ -8,7 +8,7 @@ const things: Set<Thing> = new Set();
 
 
 Renderer.getInstance(`arena`);
-
+const MAX_THINGS = 1;
 let running = null;
 
 /**
@@ -36,7 +36,7 @@ function main(): void {
   });
   document.getElementById(`run`).addEventListener(`click`, run);
 
-  for (let i = 0; i < 1; i++) {
+  for (let i = 0; i < MAX_THINGS; i++) {
     things.add(new Thing(utils.getRandomInt(500), utils.getRandomInt(500), utils.getRandomInt(360)));
   }
 

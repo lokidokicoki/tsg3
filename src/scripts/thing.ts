@@ -91,10 +91,10 @@ export default class Thing {
     this.gfx = new Renderable(`g`, { transform: `translate(${this.position.x}, ${this.position.y}) rotate(${this.angle}, 15, 15)` });
     const body = new Renderable(`rect`, { width: 30, height: 30, fill: `#00ff00`, x: 0, y: 0 });
     const eye = new Renderable(`rect`, { width: 10, height: 10, fill: `#000000`, x: 20, y: 10 });
-    const guide = new Renderable(`line`, { x1: 0, y1: 15, stroke: `black`, x2: 60, y2: 15 });
+    // const guide = new Renderable(`line`, { x1: 0, y1: 15, stroke: `black`, x2: 60, y2: 15 });
     this.gfx.append(body);
     this.gfx.append(eye);
-    this.gfx.append(guide);
+    // this.gfx.append(guide);
 
     Renderer.getInstance().container.append(this.gfx);
   }

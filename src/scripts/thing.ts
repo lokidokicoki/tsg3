@@ -23,7 +23,7 @@ export default class Thing {
     this.id = 1;
     this.angle = d;
     this.dirty = true;
-    this.speed = 0;
+    this.speed = 1;
     this.halfPi = (Math.PI / 180);
     this.createGfx();
   }
@@ -62,7 +62,6 @@ export default class Thing {
       this.position.x += this.dx;
       this.position.y += this.dy;
     }
-    this.speed = 0;
 
     console.log(this.dx, this.dy, this.position, this.angle);
     this.gfx.prop(`transform`, `translate(${this.position.x}, ${this.position.y}) rotate(${this.angle}, 15,15)`);

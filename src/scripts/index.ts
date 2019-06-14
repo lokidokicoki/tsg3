@@ -7,7 +7,13 @@ const things: Set<Thing> = new Set();
 
 
 Renderer.getInstance(`arena`);
-function run(): void {
+
+let running = null;
+
+/**
+ * Run up simulation
+ */
+function main(): void {
   document.getElementById(`move`).addEventListener(`click`, () => { move(null) });
   document.getElementById(`rotate`).addEventListener(`click`, rotate);
   document.getElementById(`rotzero`).addEventListener(`click`, rotzero);
@@ -27,10 +33,32 @@ function run(): void {
   document.getElementById(`center`).addEventListener(`click`, () => {
     move({ x: 250, y: 250, center: true });
   });
+  document.getElementById(`run`).addEventListener(`click`, run);
 
   for (let i = 0; i < 1; i++) {
-    things.add(new Thing(getRandomInt(500), getRandomInt(500), 0));//getRandomInt(360)));
+    things.add(new Thing(getRandomInt(500), getRandomInt(500), getRandomInt(360)));
   }
+
+
+}
+
+
+
+function run() {
+  if (running) {
+    stop()
+  } else {
+    start()
+  }
+}
+function start() {
+  things.forEach((thing: Thing) => thing.update());
+  running = requestAnimationFrame(start)
+}
+
+function stop() {
+  cancelAnimationFrame(running);
+  running = null;
 }
 
 function getRandomInt(max: number) {
@@ -67,20 +95,6 @@ function rotzero() {
     thing.update(true);
   });
 }
-function plusX() {
-  things.forEach((thing: Thing) => {
-    thing.position.x += 10;
-
-    thing.update();
-  });
-}
-function plusY() {
-  things.forEach((thing: Thing) => {
-    thing.position.y += 10;
-
-    thing.update();
-  });
-}
 function update() {
   things.forEach((thing: Thing) => {
     thing.update();
@@ -89,4 +103,4 @@ function update() {
 
 
 
-document.addEventListener(`DOMContentLoaded`, run);
+document.addEventListener(`DOMContentLoaded`, main);

@@ -1,5 +1,6 @@
 import Renderable from './renderable';
 import Renderer from './renderer';
+import * as utils from './utils'
 
 export default class Thing {
   public health: number;
@@ -12,6 +13,7 @@ export default class Thing {
   private dy: number;
   private dirty: boolean;
   private halfPi: number;
+  private bbox: ClientRect | DOMRect;
 
   /**
    * Creates an instance of Thing.
@@ -26,6 +28,7 @@ export default class Thing {
     this.speed = 1;
     this.halfPi = (Math.PI / 180);
     this.createGfx();
+    this.bbox = this.gfx.svg.getBoundingClientRect();
   }
 
   public set direction(angle: number) {
@@ -58,13 +61,24 @@ export default class Thing {
       this.dirty = false;
     }
 
+    let x = this.position.x;
+    let y = this.position.y
     if (ignoreMove === undefined) {
-      this.position.x += this.dx;
-      this.position.y += this.dy;
+      x += this.dx;
+      y += this.dy;
+    }
+
+    const rb = Renderer.getInstance().bbox
+    if (this.bbox.left <= rb.left || this.bbox.right >= rb.right || this.bbox.top <= rb.top || this.bbox.bottom >= rb.bottom) {
+      this.direction = utils.getRandomInt(360)
+    } else {
+      this.position.x = x;
+      this.position.y = y;
     }
 
     console.log(this.dx, this.dy, this.position, this.angle);
     this.gfx.prop(`transform`, `translate(${this.position.x}, ${this.position.y}) rotate(${this.angle}, 15,15)`);
+    this.bbox = this.gfx.svg.getBoundingClientRect();
   }
 
   /**

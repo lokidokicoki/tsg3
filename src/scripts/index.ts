@@ -2,6 +2,7 @@
 
 import Renderer from './renderer';
 import Thing from './thing';
+import * as utils from './utils';
 
 const things: Set<Thing> = new Set();
 
@@ -36,7 +37,7 @@ function main(): void {
   document.getElementById(`run`).addEventListener(`click`, run);
 
   for (let i = 0; i < 1; i++) {
-    things.add(new Thing(getRandomInt(500), getRandomInt(500), getRandomInt(360)));
+    things.add(new Thing(utils.getRandomInt(500), utils.getRandomInt(500), utils.getRandomInt(360)));
   }
 
 
@@ -59,10 +60,6 @@ function start() {
 function stop() {
   cancelAnimationFrame(running);
   running = null;
-}
-
-function getRandomInt(max: number) {
-  return Math.floor(Math.random() * Math.floor(max));
 }
 
 function move(opts?: any) {

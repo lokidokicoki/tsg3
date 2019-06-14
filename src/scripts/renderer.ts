@@ -13,6 +13,7 @@ export default class Renderer {
   public ns: string;
   public container: Renderable;
   public root: Element;
+  public bbox: ClientRect | DOMRect;
 
   private constructor(divId: string) {
     console.warn(`renderer ctro`)
@@ -20,5 +21,6 @@ export default class Renderer {
     this.root = document.getElementById(divId);
     this.container = new Renderable(`svg`, { width: `100%`, height: `100%` })
     this.root.appendChild(this.container.svg);
+    this.bbox = this.container.svg.getBoundingClientRect();
   }
 }

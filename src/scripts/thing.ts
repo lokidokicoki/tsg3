@@ -82,7 +82,7 @@ export default class Thing {
       this.y = y;
     }
 
-    console.log(this.dx, this.dy, this.x, this.y, this.angle);
+    //console.log(this.dx, this.dy, this.x, this.y, this.angle);
     this.gfx.prop(`transform`, `translate(${this.x}, ${this.y}) rotate(${this.angle}, 15,15)`);
     this.bbox = this.gfx.svg.getBoundingClientRect();
   }

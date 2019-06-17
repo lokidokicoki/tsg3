@@ -1,15 +1,18 @@
 'use strict';
 
+import * as d3 from 'd3';
 import Renderer from './renderer';
 import Thing from './thing';
 import * as utils from './utils';
+
 
 const things: Set<Thing> = new Set();
 
 
 Renderer.getInstance(`arena`);
-const MAX_THINGS = 1;
-let running = null;
+const MAX_THINGS = 10;
+let running = null; // animationFrameRequest
+const qt = d3.quadtree()
 
 /**
  * Run up simulation
@@ -54,6 +57,7 @@ function run() {
 }
 function start() {
   things.forEach((thing: Thing) => thing.update());
+
   running = requestAnimationFrame(start)
 }
 
@@ -65,8 +69,6 @@ function stop() {
 function move(opts?: any) {
   things.forEach((thing: Thing) => {
     if (opts) {
-
-
       if (opts.center) {
         thing.x = opts.x;
         thing.y = opts.y;

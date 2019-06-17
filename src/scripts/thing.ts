@@ -21,11 +21,11 @@ export default class Thing {
    * Creates an instance of Thing.
    * @memberof Thing
    */
-  constructor(x: number, y: number, d: number) {
+  constructor(x: number, y: number, d: number, id: number) {
     this.health = 100;
     this.x = x;
     this.y = y;
-    this.id = 1;
+    this.id = id;
     this.angle = d;
     this.spinCount = 0;
     this.dirty = true;
@@ -116,7 +116,7 @@ export default class Thing {
    * @memberof Thing
    */
   private createGfx() {
-    this.gfx = new Renderable(`g`, { transform: `translate(${this.x}, ${this.y}) rotate(${this.angle}, 15, 15)` });
+    this.gfx = new Renderable(`g`, { id: this.id, transform: `translate(${this.x}, ${this.y}) rotate(${this.angle}, 15, 15)` });
     const body = new Renderable(`rect`, { width: 30, height: 30, fill: `#00ff00`, x: 0, y: 0 });
     const eye = new Renderable(`rect`, { width: 10, height: 10, fill: `#000000`, x: 20, y: 10 });
     // const guide = new Renderable(`line`, { x1: 0, y1: 15, stroke: `black`, x2: 60, y2: 15 });

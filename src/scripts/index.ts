@@ -40,7 +40,7 @@ function main(): void {
   document.getElementById(`run`).addEventListener(`click`, run);
 
   for (let i = 0; i < MAX_THINGS; i++) {
-    things.add(new Thing(utils.getRandomInt(500), utils.getRandomInt(500), utils.getRandomInt(360)));
+    things.add(new Thing(utils.getRandomInt(500), utils.getRandomInt(500), utils.getRandomInt(360), i));
   }
 
 

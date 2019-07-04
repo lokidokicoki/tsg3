@@ -4,6 +4,7 @@ import * as d3 from 'd3';
 import Renderer from './renderer';
 import Thing from './thing';
 import * as utils from './utils';
+import { quadtree } from 'd3';
 
 
 const things: Set<Thing> = new Set();
@@ -12,7 +13,7 @@ const things: Set<Thing> = new Set();
 Renderer.getInstance(`arena`);
 const MAX_THINGS = 10;
 let running = null; // animationFrameRequest
-const qt = d3.quadtree()
+const quadtree = d3.quadtree();
 
 /**
  * Run up simulation

@@ -48,6 +48,11 @@ export default class Thing {
     this.speed = 10;
     this.update();
   }
+
+  public get origin() {
+    return [this.bbox.right + this.bbox.height / 2, this.bbox.top + this.bbox.height / 2];
+  }
+
   /**
    * Update gfx
    *
